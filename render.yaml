@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: spectrum-price-tool
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn server:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PIPEDRIVE_CLIENT_ID
+        value: 33f457cafe3ebf84
+      - key: PIPEDRIVE_CLIENT_SECRET
+        value: 547dea8c4f05e2c71b0bcc3ff5eaba659a867936
+      - key: REDIRECT_URI
+        sync: false
