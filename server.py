@@ -22,7 +22,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 
 # ── Config ──────────────────────────────────────────────────────────
 CONFIG_PATH = os.path.join(os.path.dirname(__file__), "config.json")
-ZITE_BASE_URL = "https://dzkrssxbqf.zite.so"
+ZITE_BASE_URL = "https://ky6eupsymb.zite.so"
 
 def load_config():
     """Load credentials from config.json file."""
