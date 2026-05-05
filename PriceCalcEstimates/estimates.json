@@ -1,1 +1,41 @@
-[]
+[
+  {
+    "id": "andritz_calc_1777995178413_1777995178413",
+    "tool": "andritz",
+    "dealId": "",
+    "customerName": "Andritz",
+    "estimateDate": "2026-05-05T15:32:58.413Z",
+    "finalPrice": 7893.605719716627,
+    "submittedBy": "Matthew Lippmann",
+    "data": {
+      "customerName": "Andritz",
+      "city": "Neenah",
+      "state": "WI",
+      "lineItems": [
+        {
+          "product": "Fluoro-Clear 60B 7.125\" Ø",
+          "diameterLabel": "7.125\"",
+          "faceIn": 160,
+          "pricePerInch": 14.375,
+          "qty": 1,
+          "unitPrice": 2300,
+          "subtotal": 2300
+        },
+        {
+          "product": "Fluoro-Stat",
+          "faceIn": 160,
+          "diamIn": 7.122,
+          "areaSqFt": 24.860469865407232,
+          "pricePerSqFt": 225,
+          "qty": 1,
+          "unitPrice": 5593.605719716627,
+          "subtotal": 5593.605719716627
+        }
+      ],
+      "includeInstall": false,
+      "installPrice": 3500,
+      "grandTotal": 7893.605719716627,
+      "submittedBy": "Matthew Lippmann"
+    }
+  }
+]
