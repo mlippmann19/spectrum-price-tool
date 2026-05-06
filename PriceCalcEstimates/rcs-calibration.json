@@ -1,0 +1,22 @@
+[
+  {
+    "id": "cal_1778082350287",
+    "date": "2026-05-06T15:45:50.287Z",
+    "numCans": 6,
+    "diameter": 12,
+    "canLen": 222,
+    "millDays": 1,
+    "suggestedTechs": 3,
+    "correctedTechs": 3,
+    "suggestedBoxes": 6,
+    "correctedBoxes": 6,
+    "techDelta": 0,
+    "boxDelta": 0,
+    "submittedBy": "Matthew Lippmann",
+    "hotelNightsPredicted": 2,
+    "hotelNightsCorrected": 2,
+    "hotelNightsDelta": 0,
+    "travelHoursPredicted": 30,
+    "travelHoursCorrected": 30
+  }
+]
