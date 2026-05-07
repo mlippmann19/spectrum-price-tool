@@ -192,7 +192,10 @@ def get_redirect_uri():
     return load_config().get("redirect_uri", "")
 
 # ── Database ────────────────────────────────────────────────────────
-DB_PATH = os.path.join(os.path.dirname(__file__), "tokens.db")
+# DB_PATH defaults to a file next to server.py, but on Render free the
+# local filesystem is wiped on every deploy. Set TOKENS_DB_PATH to a
+# mounted Render Disk path (e.g. /var/data/tokens.db) to persist.
+DB_PATH = os.environ.get("TOKENS_DB_PATH") or os.path.join(os.path.dirname(__file__), "tokens.db")
 
 def init_db():
     conn = sqlite3.connect(DB_PATH)
@@ -785,7 +788,44 @@ def bridge_error_page():
 
 
 # ── Pipedrive attach-price endpoint ─────────────────────────────────
-PIPEDRIVE_API_BASE = "https://api.pipedrive.com/v1"
+PIPEDRIVE_API_BASE_DEFAULT = "https://api.pipedrive.com/v1"
+
+
+def get_api_token():
+    """Personal API token fallback. When set, attach-price uses this
+    instead of the OAuth-installed access_token. Useful when the OAuth
+    install hasn't been run (or its tokens.db row was wiped by Render's
+    ephemeral disk).
+    """
+    return os.environ.get("PIPEDRIVE_API_TOKEN", "").strip()
+
+
+def get_api_base():
+    """Optional per-company API base, e.g. https://acme.pipedrive.com/v1.
+    Pairs with PIPEDRIVE_API_TOKEN for the api-token fallback path.
+    """
+    return os.environ.get("PIPEDRIVE_API_BASE", PIPEDRIVE_API_BASE_DEFAULT).rstrip("/")
+
+
+async def _pd_request_api_token(method: str, path: str, api_token: str, **kwargs):
+    """Call Pipedrive using the personal api_token query-string auth.
+    Returns (status_code, json_dict).
+    """
+    base = get_api_base()
+    url = f"{base}{path}"
+    # Pipedrive API token auth is via ?api_token=<token>
+    params = kwargs.pop("params", {}) or {}
+    if isinstance(params, dict):
+        params = {**params, "api_token": api_token}
+    else:
+        params = {"api_token": api_token}
+    async with httpx.AsyncClient(timeout=30.0) as client:
+        resp = await client.request(method, url, params=params, **kwargs)
+    try:
+        body = resp.json()
+    except Exception:
+        body = {"raw": resp.text[:500]}
+    return resp.status_code, body
 
 
 async def _pd_request(method: str, path: str, token_row, **kwargs):
@@ -793,7 +833,7 @@ async def _pd_request(method: str, path: str, token_row, **kwargs):
     and retry. Returns (status_code, json_dict, refreshed_token_row).
     """
     token_id, access_token, refresh_token, company_domain = token_row
-    url = f"{PIPEDRIVE_API_BASE}{path}"
+    url = f"{PIPEDRIVE_API_BASE_DEFAULT}{path}"
     async with httpx.AsyncClient(timeout=30.0) as client:
         resp = await client.request(
             method, url,
@@ -814,6 +854,19 @@ async def _pd_request(method: str, path: str, token_row, **kwargs):
     except Exception:
         body = {"raw": resp.text[:500]}
     return resp.status_code, body, token_row
+
+
+async def _pd_call(method: str, path: str, auth_ctx: dict, **kwargs):
+    """Unified Pipedrive caller. auth_ctx is either
+      {"mode": "api_token", "api_token": "..."} or
+      {"mode": "oauth",     "token_row": (id, access, refresh, domain)}
+    Returns (status, body, new_auth_ctx).
+    """
+    if auth_ctx.get("mode") == "api_token":
+        s, b = await _pd_request_api_token(method, path, auth_ctx["api_token"], **kwargs)
+        return s, b, auth_ctx
+    s, b, new_row = await _pd_request(method, path, auth_ctx["token_row"], **kwargs)
+    return s, b, {"mode": "oauth", "token_row": new_row}
 
 
 @app.post("/pipedrive/attach-price")
@@ -858,14 +911,27 @@ async def attach_price(request: Request):
     deal_value = payload.get("value")
     currency = payload.get("currency")
 
+    # Auth resolution order:
+    #   1. OAuth install row (preferred — multi-tenant, refresh-capable).
+    #   2. PIPEDRIVE_API_TOKEN env var (single-tenant fallback for when
+    #      the install hasn't been run or tokens.db was wiped on Render).
     token_row = get_latest_tokens(company_id) or get_latest_tokens()
-    if not token_row or not token_row[1]:
+    api_token = get_api_token()
+    if token_row and token_row[1]:
+        auth_ctx = {"mode": "oauth", "token_row": token_row}
+    elif api_token:
+        auth_ctx = {"mode": "api_token", "api_token": api_token}
+    else:
         log_event("attach_price_no_token", f"dealId={deal_id}")
-        return {"status": "error", "detail": "no_install_tokens"}
+        return {
+            "status": "error",
+            "detail": "no_install_tokens",
+            "hint": "Run the OAuth install (visit /install) or set PIPEDRIVE_API_TOKEN.",
+        }
 
     # 1. Pull existing products on the deal.
-    status, body, token_row = await _pd_request(
-        "GET", f"/deals/{deal_id}/products?include_product_data=1", token_row
+    status, body, auth_ctx = await _pd_call(
+        "GET", f"/deals/{deal_id}/products?include_product_data=1", auth_ctx
     )
     if status != 200:
         log_event("attach_price_fetch_products_failed", f"deal={deal_id} status={status}")
@@ -913,16 +979,16 @@ async def attach_price(request: Request):
             pid = item["product_id"]
             if pid in existing_by_pid:
                 attach_id = existing_by_pid[pid].get("id")
-                s, b, token_row = await _pd_request(
+                s, b, auth_ctx = await _pd_call(
                     "PUT", f"/deals/{deal_id}/products/{attach_id}",
-                    token_row, json=item,
+                    auth_ctx, json=item,
                 )
                 (actions["updated"] if s == 200 else actions["errors"]).append(
                     {"product_id": pid, "status": s, "body": b}
                 )
             else:
-                s, b, token_row = await _pd_request(
-                    "POST", f"/deals/{deal_id}/products", token_row, json=item,
+                s, b, auth_ctx = await _pd_call(
+                    "POST", f"/deals/{deal_id}/products", auth_ctx, json=item,
                 )
                 (actions["added"] if s == 201 else actions["errors"]).append(
                     {"product_id": pid, "status": s, "body": b}
@@ -931,8 +997,8 @@ async def attach_price(request: Request):
         for row in existing:
             if row.get("product_id") not in incoming_pids:
                 attach_id = row.get("id")
-                s, b, token_row = await _pd_request(
-                    "DELETE", f"/deals/{deal_id}/products/{attach_id}", token_row,
+                s, b, auth_ctx = await _pd_call(
+                    "DELETE", f"/deals/{deal_id}/products/{attach_id}", auth_ctx,
                 )
                 (actions["removed"] if s == 200 else actions["errors"]).append(
                     {"product_id": row.get("product_id"), "status": s, "body": b}
@@ -951,8 +1017,8 @@ async def attach_price(request: Request):
     # 3b. Deal has no products yet but caller sent lineItems → attach them.
     if not has_existing_products and has_resolved_items:
         for item in resolved:
-            s, b, token_row = await _pd_request(
-                "POST", f"/deals/{deal_id}/products", token_row, json=item,
+            s, b, auth_ctx = await _pd_call(
+                "POST", f"/deals/{deal_id}/products", auth_ctx, json=item,
             )
             (actions["added"] if s == 201 else actions["errors"]).append(
                 {"product_id": item["product_id"], "status": s, "body": b}
@@ -972,8 +1038,8 @@ async def attach_price(request: Request):
         update = {"value": deal_value}
         if currency:
             update["currency"] = currency
-        s, b, token_row = await _pd_request(
-            "PUT", f"/deals/{deal_id}", token_row, json=update,
+        s, b, auth_ctx = await _pd_call(
+            "PUT", f"/deals/{deal_id}", auth_ctx, json=update,
         )
         log_event("attach_price_value_set", f"deal={deal_id} status={s} value={deal_value}")
         return {
@@ -1023,6 +1089,65 @@ async def debug_log():
     conn.close()
     entries = [{"event": r[0], "detail": r[1], "time": r[2]} for r in rows]
     return {"log": entries}
+
+
+@app.get("/debug/tokens")
+async def debug_tokens():
+    """Report what auth path /pipedrive/attach-price will use, without
+    exposing secret values. Lets ops verify install/env state on Render
+    without opening the SQLite file.
+    """
+    conn = sqlite3.connect(DB_PATH)
+    rows = conn.execute(
+        "SELECT id, company_id, company_domain, "
+        "CASE WHEN access_token = '' OR access_token IS NULL THEN 0 ELSE 1 END, "
+        "created_at FROM tokens ORDER BY id DESC LIMIT 10"
+    ).fetchall()
+    conn.close()
+    api_token = get_api_token()
+    return {
+        "install_count": len(rows),
+        "installs": [
+            {"id": r[0], "company_id": r[1], "company_domain": r[2],
+             "has_access_token": bool(r[3]), "created_at": r[4]}
+            for r in rows
+        ],
+        "api_token_env_set": bool(api_token),
+        "api_base": get_api_base(),
+        "active_path": (
+            "oauth_install" if rows and rows[0][3]
+            else ("api_token_env" if api_token else "none")
+        ),
+        "db_path": DB_PATH,
+    }
+
+
+@app.get("/install")
+async def install_redirect():
+    """Kick off the Pipedrive OAuth install. Redirects to Pipedrive's
+    authorize URL using the configured CLIENT_ID and REDIRECT_URI. Use
+    this when /debug/tokens shows install_count=0 and api_token_env_set
+    is false.
+    """
+    client_id = get_client_id()
+    redirect_uri = get_redirect_uri()
+    if not client_id:
+        return HTMLResponse(content=error_page(
+            "Cannot start install",
+            "PIPEDRIVE_CLIENT_ID is not configured."
+        ), status_code=500)
+    if not redirect_uri:
+        return HTMLResponse(content=error_page(
+            "Cannot start install",
+            "REDIRECT_URI is not configured. Set it to the public /callback URL."
+        ), status_code=500)
+    authorize = (
+        "https://oauth.pipedrive.com/oauth/authorize"
+        f"?client_id={urllib.parse.quote(client_id, safe='')}"
+        f"&redirect_uri={urllib.parse.quote(redirect_uri, safe='')}"
+        "&response_type=code"
+    )
+    return RedirectResponse(url=authorize, status_code=302)
 
 
 if __name__ == "__main__":
