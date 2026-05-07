@@ -156,5 +156,34 @@
       "finalPrice": 25842.857142857145,
       "finalMarginPct": 65
     }
+  },
+  {
+    "id": "fluoron_1007_1778196102429",
+    "tool": "fluoron",
+    "dealId": "1007",
+    "customerName": "Deublin",
+    "estimateDate": "2026-05-07T23:21:42.429Z",
+    "finalPrice": 1560.760683595929,
+    "submittedBy": "Matthew Lippmann",
+    "htmlFilename": "estimate_fluoron_1007_Deublin_2026-05-07.html",
+    "data": {
+      "dealId": "1007",
+      "customerName": "Deublin",
+      "product": "Fluoro-Clear 20 B",
+      "faceLengthIn": 140,
+      "diameterIn": 7,
+      "sqFt": 21.380283336930535,
+      "pricePerSqFt": 73,
+      "quantity": 1,
+      "listLineItemPrice": 1560.760683595929,
+      "listTotalPrice": 1560.760683595929,
+      "adjustmentPct": 0,
+      "adjustedLineItemPrice": 1560.760683595929,
+      "adjustedTotalPrice": 1560.760683595929,
+      "addOns": [],
+      "addOnsTotal": 0,
+      "grandTotal": 1560.760683595929,
+      "submittedBy": "Matthew Lippmann"
+    }
   }
 ]
