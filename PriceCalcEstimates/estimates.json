@@ -185,5 +185,34 @@
       "grandTotal": 1560.760683595929,
       "submittedBy": "Matthew Lippmann"
     }
+  },
+  {
+    "id": "fluoron_1474_1778243541219",
+    "tool": "fluoron",
+    "dealId": "1474",
+    "customerName": "Eco Solutions",
+    "estimateDate": "2026-05-08T12:32:21.219Z",
+    "finalPrice": 2775.073510670984,
+    "submittedBy": "Leigh Ann Von Hoelle",
+    "htmlFilename": "estimate_fluoron_1474_Eco_Solutions_2026-05-08.html",
+    "data": {
+      "dealId": "1474",
+      "customerName": "Eco Solutions",
+      "product": "Fluoro-Clear 60 B",
+      "faceLengthIn": 120,
+      "diameterIn": 8.48,
+      "sqFt": 22.200588085367873,
+      "pricePerSqFt": 125,
+      "quantity": 1,
+      "listLineItemPrice": 2775.073510670984,
+      "listTotalPrice": 2775.073510670984,
+      "adjustmentPct": 0,
+      "adjustedLineItemPrice": 2775.073510670984,
+      "adjustedTotalPrice": 2775.073510670984,
+      "addOns": [],
+      "addOnsTotal": 0,
+      "grandTotal": 2775.073510670984,
+      "submittedBy": "Leigh Ann Von Hoelle"
+    }
   }
 ]
