@@ -214,5 +214,33 @@
       "grandTotal": 2775.073510670984,
       "submittedBy": "Leigh Ann Von Hoelle"
     }
+  },
+  {
+    "id": "fluoron_Guina_1778640227109",
+    "tool": "fluoron",
+    "dealId": "Guina",
+    "customerName": "",
+    "estimateDate": "2026-05-13T02:43:47.109Z",
+    "finalPrice": 19438.604544086844,
+    "submittedBy": "Charles Guina",
+    "htmlFilename": "estimate_fluoron_Guina_customer_2026-05-13.html",
+    "data": {
+      "dealId": "Guina",
+      "product": "Fluoro-Stat 60 B",
+      "faceLengthIn": 288,
+      "diameterIn": 11,
+      "sqFt": 69.11503837897544,
+      "pricePerSqFt": 225,
+      "quantity": 1,
+      "listLineItemPrice": 15550.883635269474,
+      "listTotalPrice": 15550.883635269474,
+      "adjustmentPct": 25,
+      "adjustedLineItemPrice": 19438.604544086844,
+      "adjustedTotalPrice": 19438.604544086844,
+      "addOns": [],
+      "addOnsTotal": 0,
+      "grandTotal": 19438.604544086844,
+      "submittedBy": "Charles Guina"
+    }
   }
 ]
