@@ -294,5 +294,57 @@
       "finalPrice": 33142.857142857145,
       "finalMarginPct": 65
     }
+  },
+  {
+    "id": "rcs_nodeal_1779128490787",
+    "tool": "radiant",
+    "dealId": "",
+    "customerName": "International Paper - Rome GA",
+    "estimateDate": "2026-05-18T18:21:30.787Z",
+    "finalPrice": 45285.71428571429,
+    "submittedBy": "Gianluca Santinelli",
+    "data": {
+      "customerName": "International Paper - Rome GA",
+      "serviceCity": "Rome",
+      "serviceState": "GA",
+      "estimator": "Gianluca Santinelli",
+      "serviceDate": "2026-06-27",
+      "numCans": 12,
+      "canDiameter": 60,
+      "canLength": 265,
+      "surfaceArea": 4162.610266006475,
+      "canRows": [
+        {
+          "qty": 12,
+          "diameterIn": 60,
+          "lengthIn": 265
+        }
+      ],
+      "machineTimeWindow": 12,
+      "expedited": false,
+      "weekendWork": true,
+      "finalMillDays": 0,
+      "finalJobBoxes": 12,
+      "finalTechnicians": 5,
+      "millLaborHours": 60,
+      "travelLaborHours": 40,
+      "holidayLaborHours": 0,
+      "overtimeLaborHours": 40,
+      "totalLaborCost": 13100,
+      "travelMode": "fly",
+      "hotelNights": 2,
+      "perDiemDays": 2,
+      "mileageMiles": 0,
+      "airfareCost": 1900,
+      "freightOther": 0,
+      "totalTravelCost": 2750,
+      "subtotal": 15850,
+      "expeditedPct": 0,
+      "grandTotal": 15850,
+      "defaultMarginPct": 65,
+      "defaultMarginPrice": 45285.71428571429,
+      "finalPrice": 45285.71428571429,
+      "finalMarginPct": 65
+    }
   }
 ]
