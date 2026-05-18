@@ -38,5 +38,25 @@
     "hotelNightsDelta": 0,
     "travelHoursPredicted": 36,
     "travelHoursCorrected": 36
+  },
+  {
+    "id": "cal_1779128338908",
+    "date": "2026-05-18T18:18:58.908Z",
+    "numCans": 12,
+    "diameter": 60,
+    "canLen": 265,
+    "millDays": 1,
+    "suggestedTechs": 5,
+    "correctedTechs": 5,
+    "suggestedBoxes": 12,
+    "correctedBoxes": 12,
+    "techDelta": 0,
+    "boxDelta": 0,
+    "submittedBy": "Gianluca Santinelli",
+    "hotelNightsPredicted": 2,
+    "hotelNightsCorrected": 2,
+    "hotelNightsDelta": 0,
+    "travelHoursPredicted": 30,
+    "travelHoursCorrected": 30
   }
 ]
