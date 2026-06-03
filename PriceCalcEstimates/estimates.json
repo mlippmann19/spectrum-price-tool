@@ -668,5 +668,35 @@
       "grandTotal": 30.679615757712828,
       "submittedBy": "Jennifer Wallace"
     }
+  },
+  {
+    "id": "andritz_calc_1780498663871_1780498663871",
+    "tool": "andritz",
+    "dealId": "",
+    "customerName": "Andritz",
+    "estimateDate": "2026-06-03T14:57:43.871Z",
+    "finalPrice": 65.04078540635119,
+    "submittedBy": "Jennifer Wallace",
+    "data": {
+      "customerName": "Andritz",
+      "city": "Neenah",
+      "state": "WI",
+      "lineItems": [
+        {
+          "product": "Fluoro-Stat",
+          "faceIn": 1,
+          "diamIn": 13.25,
+          "areaSqFt": 0.28907015736156083,
+          "pricePerSqFt": 225,
+          "qty": 1,
+          "unitPrice": 65.04078540635119,
+          "subtotal": 65.04078540635119
+        }
+      ],
+      "includeInstall": false,
+      "installPrice": 3500,
+      "grandTotal": 65.04078540635119,
+      "submittedBy": "Jennifer Wallace"
+    }
   }
 ]
