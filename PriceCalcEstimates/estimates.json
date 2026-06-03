@@ -548,5 +548,35 @@
       "grandTotal": 2300,
       "submittedBy": "Jennifer Wallace"
     }
+  },
+  {
+    "id": "andritz_calc_1780498255619_1780498255619",
+    "tool": "andritz",
+    "dealId": "",
+    "customerName": "Andritz",
+    "estimateDate": "2026-06-03T14:50:55.619Z",
+    "finalPrice": 51.54175447295755,
+    "submittedBy": "Jennifer Wallace",
+    "data": {
+      "customerName": "Andritz",
+      "city": "Neenah",
+      "state": "WI",
+      "lineItems": [
+        {
+          "product": "Fluoro-Wear",
+          "faceIn": 1,
+          "diamIn": 10.5,
+          "areaSqFt": 0.22907446432425577,
+          "pricePerSqFt": 225,
+          "qty": 1,
+          "unitPrice": 51.54175447295755,
+          "subtotal": 51.54175447295755
+        }
+      ],
+      "includeInstall": false,
+      "installPrice": 3500,
+      "grandTotal": 51.54175447295755,
+      "submittedBy": "Jennifer Wallace"
+    }
   }
 ]
