@@ -490,5 +490,34 @@
       "grandTotal": 6036.709910212946,
       "submittedBy": "Leigh Ann Von Hoelle"
     }
+  },
+  {
+    "id": "andritz_calc_1780498164863_1780498164863",
+    "tool": "andritz",
+    "dealId": "",
+    "customerName": "Andritz",
+    "estimateDate": "2026-06-03T14:49:24.863Z",
+    "finalPrice": 2300,
+    "submittedBy": "Jennifer Wallace",
+    "data": {
+      "customerName": "Andritz",
+      "city": "Neenah",
+      "state": "WI",
+      "lineItems": [
+        {
+          "product": "Fluoro-Clear 60B 7.125\" Ø",
+          "diameterLabel": "7.125\"",
+          "faceIn": 1,
+          "pricePerInch": 2300,
+          "qty": 1,
+          "unitPrice": 2300,
+          "subtotal": 2300
+        }
+      ],
+      "includeInstall": false,
+      "installPrice": 3500,
+      "grandTotal": 2300,
+      "submittedBy": "Jennifer Wallace"
+    }
   }
 ]
