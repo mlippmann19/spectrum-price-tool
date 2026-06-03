@@ -433,5 +433,34 @@
       "grandTotal": 2300,
       "submittedBy": "Jennifer Wallace"
     }
+  },
+  {
+    "id": "fluoron_1554_1780494059964",
+    "tool": "fluoron",
+    "dealId": "1554",
+    "customerName": "Kunshan Mechanical",
+    "estimateDate": "2026-06-03T13:40:59.964Z",
+    "finalPrice": 5408.892079550799,
+    "submittedBy": "Leigh Ann Von Hoelle",
+    "htmlFilename": "estimate_fluoron_1554_Kunshan_Mechanical_2026-06-03.html",
+    "data": {
+      "dealId": "1554",
+      "customerName": "Kunshan Mechanical",
+      "product": "Fluoro-Clear 60 NB",
+      "faceLengthIn": 110.24,
+      "diameterIn": 20.08,
+      "sqFt": 48.29367928170357,
+      "pricePerSqFt": 112,
+      "quantity": 1,
+      "listLineItemPrice": 5408.892079550799,
+      "listTotalPrice": 5408.892079550799,
+      "adjustmentPct": 0,
+      "adjustedLineItemPrice": 5408.892079550799,
+      "adjustedTotalPrice": 5408.892079550799,
+      "addOns": [],
+      "addOnsTotal": 0,
+      "grandTotal": 5408.892079550799,
+      "submittedBy": "Leigh Ann Von Hoelle"
+    }
   }
 ]
