@@ -462,5 +462,33 @@
       "grandTotal": 5408.892079550799,
       "submittedBy": "Leigh Ann Von Hoelle"
     }
+  },
+  {
+    "id": "fluoron_1554_1780494223443",
+    "tool": "fluoron",
+    "dealId": "1554",
+    "customerName": "",
+    "estimateDate": "2026-06-03T13:43:43.443Z",
+    "finalPrice": 6036.709910212946,
+    "submittedBy": "Leigh Ann Von Hoelle",
+    "htmlFilename": "estimate_fluoron_1554_customer_2026-06-03.html",
+    "data": {
+      "dealId": "1554",
+      "product": "Fluoro-Clear 60 B",
+      "faceLengthIn": 110.24,
+      "diameterIn": 20.08,
+      "sqFt": 48.29367928170357,
+      "pricePerSqFt": 125,
+      "quantity": 1,
+      "listLineItemPrice": 6036.709910212946,
+      "listTotalPrice": 6036.709910212946,
+      "adjustmentPct": 0,
+      "adjustedLineItemPrice": 6036.709910212946,
+      "adjustedTotalPrice": 6036.709910212946,
+      "addOns": [],
+      "addOnsTotal": 0,
+      "grandTotal": 6036.709910212946,
+      "submittedBy": "Leigh Ann Von Hoelle"
+    }
   }
 ]
