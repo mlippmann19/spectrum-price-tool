@@ -698,5 +698,40 @@
       "grandTotal": 65.04078540635119,
       "submittedBy": "Jennifer Wallace"
     }
+  },
+  {
+    "id": "fluoron_1562_1780880278324",
+    "tool": "fluoron",
+    "dealId": "1562",
+    "customerName": "Nelson White, Bottcher",
+    "estimateDate": "2026-06-08T00:57:58.324Z",
+    "finalPrice": 1494.0195505498953,
+    "submittedBy": "Leigh Ann Von Hoelle",
+    "htmlFilename": "estimate_fluoron_1562_Nelson_White__Bottcher_2026-06-08.html",
+    "data": {
+      "dealId": "1562",
+      "customerName": "Nelson White, Bottcher",
+      "product": "Fluoro-Flex 60 B",
+      "faceLengthIn": 40.5,
+      "diameterIn": 5,
+      "sqFt": 4.417864669110646,
+      "pricePerSqFt": 225,
+      "quantity": 1,
+      "listLineItemPrice": 994.0195505498953,
+      "listTotalPrice": 994.0195505498953,
+      "adjustmentPct": 0,
+      "adjustedLineItemPrice": 994.0195505498953,
+      "adjustedTotalPrice": 994.0195505498953,
+      "addOns": [
+        {
+          "name": "In-House Install",
+          "qty": 1,
+          "price": 500
+        }
+      ],
+      "addOnsTotal": 500,
+      "grandTotal": 1494.0195505498953,
+      "submittedBy": "Leigh Ann Von Hoelle"
+    }
   }
 ]
