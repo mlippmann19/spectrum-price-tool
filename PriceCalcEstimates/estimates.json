@@ -733,5 +733,56 @@
       "grandTotal": 1494.0195505498953,
       "submittedBy": "Leigh Ann Von Hoelle"
     }
+  },
+  {
+    "id": "rcs_nodeal_1786988408911",
+    "tool": "radiant",
+    "dealId": "",
+    "customerName": "Georgia Pacific - Brewton - AL",
+    "estimateDate": "2026-08-17T17:40:08.911Z",
+    "finalPrice": 34800,
+    "submittedBy": "Gianluca Santinelli",
+    "data": {
+      "customerName": "Georgia Pacific - Brewton - AL",
+      "serviceCity": "Brewton",
+      "serviceState": "AL",
+      "estimator": "Gianluca Santinelli",
+      "serviceDate": "2026-10-03",
+      "numCans": 14,
+      "canDiameter": 60,
+      "canLength": 215.25,
+      "surfaceArea": 3944.662275663684,
+      "canRows": [
+        {
+          "qty": 14,
+          "diameterIn": 60,
+          "lengthIn": 215.25
+        }
+      ],
+      "machineTimeWindow": 12,
+      "expedited": false,
+      "weekendWork": true,
+      "finalMillDays": 0,
+      "finalJobBoxes": 14,
+      "finalTechnicians": 6,
+      "millLaborHours": 36,
+      "travelLaborHours": 29,
+      "holidayLaborHours": 0,
+      "overtimeLaborHours": 36,
+      "totalLaborCost": 9555,
+      "hotelNights": 2,
+      "perDiemDays": 3,
+      "mileageMiles": 1930,
+      "airfareCost": 0,
+      "freightOther": 24,
+      "totalTravelCost": 2625,
+      "subtotal": 12180,
+      "expeditedPct": 0,
+      "grandTotal": 12180,
+      "defaultMarginPct": 65,
+      "defaultMarginPrice": 34800,
+      "finalPrice": 34800,
+      "finalMarginPct": 65
+    }
   }
 ]
