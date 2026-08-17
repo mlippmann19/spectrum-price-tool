@@ -78,5 +78,20 @@
     "hotelNightsDelta": 0,
     "travelHoursPredicted": 40,
     "travelHoursCorrected": 40
+  },
+  {
+    "id": "cal_1786988412520",
+    "date": "2026-08-17T17:40:12.520Z",
+    "numCans": 14,
+    "diameter": 60,
+    "canLen": 215.25,
+    "millDays": 0,
+    "suggestedTechs": 6,
+    "correctedTechs": 6,
+    "suggestedBoxes": 14,
+    "correctedBoxes": 14,
+    "techDelta": 0,
+    "boxDelta": 0,
+    "submittedBy": "Gianluca Santinelli"
   }
 ]
